@@ -6,9 +6,17 @@ import (
 	"strings"
 )
 
+// FIXME: keep me in the loop if I type some invalid menu selection
+// FIXME: do not print 'Generated Password:' if an invalid selection has been done
+// FIXME: keep a more idiomatic solution structure (e.g. cmd/password_generator/main.go)
+// FIXME: use modules
+// FIXME: pkg math/rand should be replaced with crypto/rand (read a bit about this)
+// TODO: add unit tests
+
 // generatePassword displays a menu to the user and returns a password based on their selection.
 func generatePassword(length int) string {
 	// Define character sets for password generation
+	// FIXME: define these as constants.
 	LowercaseChars := "abcdefghijklmnopqrstuvwxyz"
 	UppercaseChars := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	Digits := "0123456789"

@@ -25,3 +25,5 @@ A CLI tool that generates random passwords with several options:
 ```bash
 go run Password_Generator.go
 ```
+
+<!-- TODO: fix these warnings. Write legit MD files. -->
