@@ -7,12 +7,12 @@ import (
 	"strings"
 )
 
-const(
+const (
 	LowercaseChars = "abcdefghijklmnopqrstuvwxyz"
 	UppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	Digits = "0123456789"
-	SpecialChars = "!@#$%^&*()-_=+[]{}|;:,.<>?/"
-	AllChars = LowercaseChars + UppercaseChars + Digits + SpecialChars
+	Digits         = "0123456789"
+	SpecialChars   = "!@#$%^&*()-_=+[]{}|;:,.<>?/"
+	AllChars       = LowercaseChars + UppercaseChars + Digits + SpecialChars
 )
 
 // generatePassword displays a menu to the user and returns a password based on their selection.
@@ -34,7 +34,10 @@ func generatePassword(length int) string {
 
 		// Read the user's menu selection
 		var userChoice int
-		fmt.Scanln(&userChoice)
+		if _, err := fmt.Scanln(&userChoice); err != nil {
+			fmt.Println("Invalid input. Please enter a number between 1 and 7.")
+			continue
+		}
 
 		// Generate password based on user's choice
 		switch userChoice {
@@ -44,13 +47,18 @@ func generatePassword(length int) string {
 		case 2:
 			// Prompt user for a custom length
 			fmt.Print("Enter the desired password length: ")
-			fmt.Scanln(&length)
+			if _, err := fmt.Scanln(&length); err != nil {
+				fmt.Println("Invalid input. Using default length.")
+			}
 			return generatePasswordFromCharSet(length, AllChars)
 		case 3:
 			// Prompt user for a custom character set
 			fmt.Print("Enter the character set to use for password generation: ")
 			var charSet string
-			fmt.Scanln(&charSet)
+			if _, err := fmt.Scanln(&charSet); err != nil {
+				fmt.Println("Invalid input. Using default character set.")
+				charSet = AllChars
+			}
 			return generatePasswordFromCharSet(length, charSet)
 		case 4:
 			// Exclude lowercase letters
