@@ -1,3 +1,5 @@
+# Go-Learning
+
 A repository for storing mini projects as I learn Go.
 
 ## Projects
