@@ -14,8 +14,17 @@ const testLength = 50
 func simulateUserInput(input string) func() {
 	originalStdin := os.Stdin
 	r, w, _ := os.Pipe()
-	w.WriteString(input)
-	w.Close()
+	_, err := w.WriteString(input)
+	if err != nil {
+		fmt.Printf("Error writing to pipe: %v\n", err)
+	}
+
+	err = w.Close()
+
+	if err != nil {
+		fmt.Printf("Error closing write end of pipe: %v\n", err)
+	}
+
 	os.Stdin = r
 	return func() { os.Stdin = originalStdin }
 }
